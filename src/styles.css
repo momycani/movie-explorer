@@ -541,6 +541,29 @@ header {
 .movie:nth-child(3) { animation-delay: 150ms; }
 .movie:nth-child(4) { animation-delay: 200ms; }
 
+.movies__search {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0 32px;
+}
+
+.movies__search--input {
+  flex: 1;
+  height: 36px;
+  padding: 0 18px;
+  font-size: 16px;
+  border: 1px solid #bdbdbd;
+  outline: none;
+}
+
+.movies__search--btn {
+  height: 36px;
+  padding: 0 28px;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
 .cart__header {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;

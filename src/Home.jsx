@@ -50,7 +50,7 @@ function runSearch() {
     setError(false);
     setLoading(true);
 
-    navigate("/movies", { state: { mode: "search", queries } });
+    navigate("/movies", { state: { mode: "search", title: raw,  queries } });
 
     setLoading(false);
     return;

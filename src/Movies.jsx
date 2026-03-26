@@ -34,6 +34,11 @@ export default function Movies() {
   const [loading, setLoading] = useState(true);
   const [empty, setEmpty] = useState(false);
   const [sort, setSort] = useState("");
+  const [searchInput, setSearchInput] = useState(title || "");
+
+  useEffect(() => {
+  setSearchInput(title || "");
+}, [title]);
 
   useEffect(() => {
   let cancelled = false;
@@ -106,15 +111,50 @@ if (mode === "title") {
     return arr;
   }, [movies, sort]);
 
+  function handleSearchSubmit(e) {
+  e.preventDefault();
+
+  const trimmed = searchInput.trim();
+  if (!trimmed) return;
+
+  navigate("/movies", {
+    state: {
+      mode: "search",
+      title: trimmed,
+      queries: [trimmed],
+    },
+  });
+}
+
 return (
   <div id="movies__body">
     <main id="movies__main">
       <section id="movies">
         <div className="container">
           <div className="row">
+          <form className="movies__search" onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              placeholder="Search for a movie"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="movies__search--input"
+            />
+            <button type="submit" className="btn movies__search--btn">
+              Search
+            </button>
+          </form>
             <div className="movies__header">
               <h2 className="section__title movies__header--title">
-                All <span className="peru">Movies</span>
+                {title ? (
+                  <>
+                    Results for <span className="peru">"{title}"</span>
+                  </>
+                ) : (
+                  <>
+                    All <span className="peru">Movies</span>
+                  </>
+                )}
               </h2>
 
               <select value={sort} onChange={(e) => setSort(e.target.value)}>
